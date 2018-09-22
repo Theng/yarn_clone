@@ -1,24 +1,30 @@
 import React, { Component } from "react";
-import {
-	Text,
-	View,
-	TouchableWithoutFeedback,
-	Image
-} from "react-native";
+import { Text, View, TouchableWithoutFeedback, Image, Platform } from "react-native";
 import FastImage from "react-native-fast-image";
 
 const width = 148;
 const height = width * 1.4;
 
 class ArticleCard extends Component {
+
+	openArticle=()=>{
+		this.props.navigation.navigate({
+			routeName: "ReaderScreen",
+			key: "openReaderScreen"
+		});
+	}
+
 	render() {
-		let thumbnail = "https://image.ibb.co/kbRq99/AXL_trailer_min.jpg";
-		let percentage = 5;
-		let title = "Haunted Camper";
-		let subTitle = "Who's watching me sleep?";
-		let episode = "Episode 1 of 10";
+		let {
+			thumbnail,
+			percentage,
+			title,
+			subTitle,
+			episode,
+			isNew
+		} = this.props.item;
 		return (
-			<TouchableWithoutFeedback>
+			<TouchableWithoutFeedback onPress={this.openArticle}>
 				<View style={styles.viewFlex}>
 					<FastImage
 						style={styles.image}
@@ -30,12 +36,14 @@ class ArticleCard extends Component {
 					/>
 					<View style={styles.absoluteContainer}>
 						<View style={styles.flex}>
-							<View style={styles.newContainer}>
-								<Image
-									style={styles.newImage}
-									source={require("../assets/images/new.png")}
-								/>
-							</View>
+							{isNew ? (
+								<View style={styles.newContainer}>
+									<Image
+										style={styles.newImage}
+										source={require("../assets/images/new.png")}
+									/>
+								</View>
+							) : null}
 						</View>
 						<View style={styles.bottomAbsoluteContainer}>
 							<Text style={styles.title}>{title}</Text>
@@ -72,7 +80,7 @@ const styles = {
 		height: height,
 		width: width,
 		backgroundColor: "gray",
-		marginLeft: 6,
+		marginLeft: 8,
 		borderRadius: 8
 	},
 	image: { height: height, width: width, borderRadius: 8 },
@@ -109,7 +117,7 @@ const styles = {
 	subTitle: {
 		color: "white",
 		fontSize: 16,
-		fontWeight: "600",
+		fontWeight: Platform.OS=="ios"?"600": "400",
 		marginTop: 4
 	},
 	progressContainer: {

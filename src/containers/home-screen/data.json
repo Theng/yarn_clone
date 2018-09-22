@@ -1,0 +1,41 @@
+{
+    "session":"Recently Added",
+    "list":[
+        {
+            "id":1,
+            "thumbnail" :"https://image.ibb.co/kbRq99/AXL_trailer_min.jpg",
+            "percentage" : 37,
+            "title" : "Haunted Camper",
+            "subTitle" : "Who's watching me sleep?",
+            "episode" : "Episode 1 of 10",
+            "isNew" : false
+        },
+        {
+            "id":2,
+            "thumbnail" :"https://image.ibb.co/kbRq99/AXL_trailer_min.jpg",
+            "percentage" : 0,
+            "title" : "Haunted Camper",
+            "subTitle" : "Who's watching me sleep?",
+            "episode" : "Episode 1 of 10",
+            "isNew" : true
+        },
+        {
+            "id":3,
+            "thumbnail" :"https://image.ibb.co/kbRq99/AXL_trailer_min.jpg",
+            "percentage" : 0,
+            "title" : "Haunted Camper",
+            "subTitle" : "Who's watching me sleep?",
+            "episode" : "Episode 1 of 10",
+            "isNew" : true
+        },
+        {
+            "id":4,
+            "thumbnail" :"https://image.ibb.co/kbRq99/AXL_trailer_min.jpg",
+            "percentage" : 0,
+            "title" : "Haunted Camper",
+            "subTitle" : "Who's watching me sleep?",
+            "episode" : "Episode 1 of 10",
+            "isNew" : true
+        }
+    ]
+}

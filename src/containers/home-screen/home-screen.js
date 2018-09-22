@@ -8,10 +8,10 @@ import {
 	ScrollView
 } from "react-native";
 import HeaderImageCarousel from "@components/headerImageCarousel"
-import ArticleCard from "@components/articleCard"
-
+import CardSession from "@components/cardSession"
 import c from "@src/constants";
 
+import data from "./data.json"
 class HomeScreen extends Component {
     
 	constructor(props) {
@@ -25,29 +25,12 @@ class HomeScreen extends Component {
 		
 	}
 
-	openReaderScreen=()=>{
-		this.props.navigation.navigate({
-			routeName: "ReaderScreen",
-			key: "openReaderScreen"
-		});
-	}
-
 	render() {
 		return (
 			<View style={styles.container}>
 				<ScrollView>
 					<HeaderImageCarousel/>
-					<TouchableWithoutFeedback onPress={this.openReaderScreen}>
-						<View style={{padding:20}}>
-							<Text>Home</Text>
-						</View>
-					</TouchableWithoutFeedback>
-					<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-					<ArticleCard/>
-					<ArticleCard/>
-					<ArticleCard/>
-					</ScrollView>
-					
+					<CardSession data={data} navigation={this.props.navigation} />
 				</ScrollView>
             </View>
 		);

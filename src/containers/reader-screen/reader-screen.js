@@ -7,7 +7,7 @@ import {
 	TouchableWithoutFeedback
 } from "react-native";
 import Header from "@components/header"
-
+import StoryViewer from "@components/storyViewer"
 import c from "@src/constants";
 
 class ReaderScreen extends Component {
@@ -32,11 +32,12 @@ class ReaderScreen extends Component {
 		return (
 			<View style={styles.container}>
 				<Header />
-				<TouchableWithoutFeedback onPress={this.close}>
+				{/* <TouchableWithoutFeedback onPress={this.close}>
 					<View style={{padding:20}}>
 						<Text>Close</Text>
 					</View>
-				</TouchableWithoutFeedback>
+				</TouchableWithoutFeedback> */}
+				<StoryViewer/>
             </View>
 		);
 	}
