@@ -1,31 +1,42 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React from "react";
+// import { AsyncStorage } from "react-native";
+import {
+	StackNavigator
+} from "react-navigation";
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import FastImage from 'react-native-fast-image'
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Hello</Text>
-      </View>
-    );
-  }
-}
+//Redux
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-});
+import { rootReducer } from "./reducers";
+const store = createStore(
+	rootReducer,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+//Redux
+
+// Screen
+import HomeScreen from "@containers/home-screen/home-screen"
+import ReaderScreen from "@containers/reader-screen/reader-screen"
+// Screen
+
+
+const RootSwitchNavigator = StackNavigator(
+	{
+		HomeScreen: HomeScreen,
+		ReaderScreen: ReaderScreen
+	},
+	{
+		initialRouteName: "HomeScreen",
+		mode: "modal",
+		headerMode: 'none'
+	}
+);
+
+const AppWithNavigationState = () => (
+	<Provider store={store}>
+				<RootSwitchNavigator />
+	</Provider>
+);
+export default AppWithNavigationState;
