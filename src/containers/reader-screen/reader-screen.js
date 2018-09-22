@@ -7,7 +7,7 @@ import {
 	TouchableWithoutFeedback
 } from "react-native";
 import Header from "@components/header"
-import StoryViewer from "@components/storyViewer"
+import StoryViewer from "@components/storyViewer/storyViewer"
 import c from "@src/constants";
 
 class ReaderScreen extends Component {
