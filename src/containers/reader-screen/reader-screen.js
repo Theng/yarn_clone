@@ -29,15 +29,16 @@ class ReaderScreen extends Component {
 	}
 
 	render() {
+		let data = this.props.navigation.state.params.item
 		return (
 			<View style={styles.container}>
-				<Header />
+				<Header navigation={this.props.navigation} title={data.title} episode={"Episode "+data.story.episode+" of "+data.story.total_episode}/>
 				{/* <TouchableWithoutFeedback onPress={this.close}>
 					<View style={{padding:20}}>
 						<Text>Close</Text>
 					</View>
 				</TouchableWithoutFeedback> */}
-				<StoryViewer/>
+				<StoryViewer navigation={this.props.navigation} item={data}/>
             </View>
 		);
 	}

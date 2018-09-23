@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-import { Text, View, TouchableWithoutFeedback, Image, Platform } from "react-native";
+import { Text, View, TouchableWithoutFeedback, Image, Platform , AsyncStorage} from "react-native";
 import FastImage from "react-native-fast-image";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addReadStory } from "@actions"
 
 const width = 148;
 const height = width * 1.4;
@@ -8,20 +12,36 @@ const height = width * 1.4;
 class ArticleCard extends Component {
 
 	openArticle=()=>{
+		canAdd = true
+		useStory = null
+		this.props.inProgress.list.map((item,index)=>{
+			if(this.props.item.id==item.id){
+				canAdd = false
+				useStory = item
+			}
+		})
+		if(canAdd){
+			this.props.addReadStory([...this.props.inProgress.list,this.props.item])
+			AsyncStorage.setItem("inprogress_list",JSON.stringify([...this.props.inProgress.list,this.props.item]))
+		}
 		this.props.navigation.navigate({
 			routeName: "ReaderScreen",
-			key: "openReaderScreen"
+			key: "openReaderScreen",
+			params:{
+				item:canAdd?this.props.item:useStory
+			}
 		});
 	}
 
 	render() {
 		let {
 			thumbnail,
-			percentage,
+			last_read,
 			title,
 			subTitle,
 			episode,
-			isNew
+			isNew,
+			story
 		} = this.props.item;
 		return (
 			<TouchableWithoutFeedback onPress={this.openArticle}>
@@ -48,7 +68,7 @@ class ArticleCard extends Component {
 						<View style={styles.bottomAbsoluteContainer}>
 							<Text style={styles.title}>{title}</Text>
 							<View style={styles.episodeContainer}>
-								<Text style={styles.episode}>{episode}</Text>
+								<Text style={styles.episode}>{"Episode "+story.episode+" of "+story.total_episode}</Text>
 							</View>
 
 							<Text numberOfLines={3} style={styles.subTitle}>
@@ -61,8 +81,8 @@ class ArticleCard extends Component {
 							style={[
 								styles.progress,
 								{
-									borderBottomRightRadius: percentage != 100 ? 0 : 8,
-									width: width * (percentage / 100)
+									borderBottomRightRadius: last_read != story.messages.length ? 0 : 8,
+									width:last_read? (width * ( (last_read/(story.messages.length/100))/100 )):0
 								}
 							]}
 						/>
@@ -73,7 +93,25 @@ class ArticleCard extends Component {
 	}
 }
 
-export default ArticleCard;
+
+const mapStateToProps = state => {
+	return {
+		inProgress: state.inProgress
+	};
+};
+
+function matchDispatchToProps(dispatch) {
+	return bindActionCreators(
+		{
+			addReadStory
+		},
+		dispatch
+	);
+}
+export default connect(
+	mapStateToProps,
+	matchDispatchToProps
+)(ArticleCard)
 
 const styles = {
 	viewFlex: {

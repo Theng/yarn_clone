@@ -1,7 +1,8 @@
 import c from "../constants";
 
-export const fetchSampleUser = () => {
+export const addReadStory = story => {
 	return {
-		type: c.FETCHING_SAMPLE_USER
+		type: c.ADD_READ_STORY,
+		payload: story
 	};
 };

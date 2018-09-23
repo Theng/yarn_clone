@@ -5,11 +5,16 @@ import {
 	Dimensions,
 	Text,
 	TouchableWithoutFeedback,
-	ScrollView
+	ScrollView,
+	AsyncStorage
 } from "react-native";
 import HeaderImageCarousel from "@components/headerImageCarousel"
 import CardSession from "@components/cardSession"
 import c from "@src/constants";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addReadStory } from "@actions"
 
 import data from "./data.json"
 class HomeScreen extends Component {
@@ -22,7 +27,11 @@ class HomeScreen extends Component {
 	}
 
 	componentDidMount() {
-		
+		AsyncStorage.getItem("inprogress_list").then((data)=>{
+			if(data){
+				this.props.addReadStory(JSON.parse(data))
+			}
+		})
 	}
 
 	render() {
@@ -31,13 +40,33 @@ class HomeScreen extends Component {
 				<ScrollView>
 					<HeaderImageCarousel/>
 					<CardSession data={data} navigation={this.props.navigation} />
+					<CardSession data={this.props.inProgress} navigation={this.props.navigation} />
 				</ScrollView>
             </View>
 		);
 	}
 }
 
-export default HomeScreen;
+
+const mapStateToProps = state => {
+	return {
+		inProgress: state.inProgress
+		
+	};
+};
+
+function matchDispatchToProps(dispatch) {
+	return bindActionCreators(
+		{
+			addReadStory
+		},
+		dispatch
+	);
+}
+export default connect(
+	mapStateToProps,
+	matchDispatchToProps
+)(HomeScreen)
 
 const styles = StyleSheet.create({
 	container: {
