@@ -2,59 +2,58 @@ import React, { Component } from "react";
 import {
 	StyleSheet,
 	View,
-	Dimensions,
-	Text,
-	TouchableWithoutFeedback,
 	ScrollView,
 	AsyncStorage
 } from "react-native";
-import HeaderImageCarousel from "@components/headerImageCarousel"
-import CardSession from "@components/cardSession"
+import HeaderImageCarousel from "@components/headerImageCarousel";
+import CardSession from "@components/cardSession";
 import c from "@src/constants";
+import * as Animatable from "react-native-animatable";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addReadStory } from "@actions"
+import { addReadStory } from "@actions";
 
-import data from "./data.json"
+import data from "./data.json";
 class HomeScreen extends Component {
-    
 	constructor(props) {
 		super(props);
-		this.state = {
-            
-        };
 	}
 
 	componentDidMount() {
-		AsyncStorage.getItem("inprogress_list").then((data)=>{
-			if(data){
-				this.props.addReadStory(JSON.parse(data))
+		AsyncStorage.getItem("inprogress_list").then(data => {
+			if (data) {
+				this.props.addReadStory(JSON.parse(data));
 			}
-		})
+		});
 	}
 
 	render() {
 		return (
 			<View style={styles.container}>
 				<ScrollView>
-					<HeaderImageCarousel/>
-					<CardSession data={data} navigation={this.props.navigation} />
-					<CardSession data={this.props.inProgress} navigation={this.props.navigation} />
-					<TouchableWithoutFeedback onPress={()=> AsyncStorage.clear()}>
+					<Animatable.View animation="fadeInDown" duration={500}>
+						<HeaderImageCarousel />
+						<CardSession data={data} navigation={this.props.navigation} />
+						<CardSession
+							data={this.props.inProgress}
+							navigation={this.props.navigation}
+						/>
+						<View style={styles.space} />
+
+						{/* <TouchableWithoutFeedback onPress={()=> AsyncStorage.clear()}>
 						<Text style={{padding:20,color:"white"}}>Clear</Text>
-					</TouchableWithoutFeedback>
+					</TouchableWithoutFeedback> */}
+					</Animatable.View>
 				</ScrollView>
-            </View>
+			</View>
 		);
 	}
 }
 
-
 const mapStateToProps = state => {
 	return {
 		inProgress: state.inProgress
-		
 	};
 };
 
@@ -69,11 +68,14 @@ function matchDispatchToProps(dispatch) {
 export default connect(
 	mapStateToProps,
 	matchDispatchToProps
-)(HomeScreen)
+)(HomeScreen);
 
 const styles = StyleSheet.create({
 	container: {
-		flex:1,
+		flex: 1,
 		backgroundColor: c.appBackground
+	},
+	space: {
+		height: 32
 	}
 });

@@ -39,7 +39,6 @@ class ArticleCard extends Component {
 			last_read,
 			title,
 			subTitle,
-			episode,
 			isNew,
 			story
 		} = this.props.item;
@@ -93,7 +92,6 @@ class ArticleCard extends Component {
 	}
 }
 
-
 const mapStateToProps = state => {
 	return {
 		inProgress: state.inProgress
@@ -117,7 +115,7 @@ const styles = {
 	viewFlex: {
 		height: height,
 		width: width,
-		backgroundColor: "gray",
+		backgroundColor: "#95a5a6",
 		marginLeft: 8,
 		borderRadius: 8
 	},

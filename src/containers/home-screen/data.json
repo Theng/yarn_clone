@@ -3,7 +3,7 @@
 	"list": [
 		{
 			"id": 1,
-			"thumbnail": "https://image.ibb.co/kbRq99/AXL_trailer_min.jpg",
+			"thumbnail": "https://image.ibb.co/iFUvBp/3.jpg",
             "current_order": null,
             "last_read":0,
 			"title": "Haunted Camper",
@@ -18,7 +18,7 @@
 						"name": "Julia",
 						"is_typing": false,
 						"order": 0,
-						"image": "https://image.ibb.co/kbRq99/AXL_trailer_min.jpg"
+						"image": "https://image.ibb.co/b2v2rp/6.jpg"
 					},
 					{
 						"name": "Mom",
@@ -175,11 +175,11 @@
 		},
 		{
 			"id": 2,
-			"thumbnail": "https://image.ibb.co/kbRq99/AXL_trailer_min.jpg",
+			"thumbnail": "https://image.ibb.co/dWmaBp/4.jpg",
             "current_order": null,
             "last_read":0,
-			"title": "Haunted Camper",
-			"subTitle": "Who's watching me sleep?",
+			"title": "The Sisters Brothers",
+			"subTitle": "In 1850s Oregon, a gold prospector is chased by the infamous duo of assassins, the Sisters brothers.",
 			"isNew": false,
 			"story": {
 				"title": "Mystery Dog",
@@ -346,11 +346,11 @@
 		},
 		{
 			"id": 3,
-			"thumbnail": "https://image.ibb.co/kbRq99/AXL_trailer_min.jpg",
+			"thumbnail": "https://image.ibb.co/eoj6HU/1.jpg",
             "current_order": null,
             "last_read":0,
-			"title": "Haunted Camper",
-			"subTitle": "Who's watching me sleep?",
+			"title": "Colette",
+			"subTitle": "Colette is pushed by her husband to write novels under his name.",
 			"isNew": false,
 			"story": {
 				"title": "Mystery Dog",
@@ -517,11 +517,11 @@
 		},
 		{
 			"id": 4,
-			"thumbnail": "https://image.ibb.co/kbRq99/AXL_trailer_min.jpg",
+			"thumbnail": "https://image.ibb.co/eKNFBp/2.jpg",
             "current_order": null,
             "last_read": 0,
-			"title": "Haunted Camper",
-			"subTitle": "Who's watching me sleep?",
+			"title": "Love, Gilda",
+			"subTitle": "In her own words",
 			"isNew": false,
 			"story": {
 				"title": "Mystery Dog",
@@ -688,11 +688,11 @@
 		},
 		{
 			"id": 5,
-			"thumbnail": "https://image.ibb.co/kbRq99/AXL_trailer_min.jpg",
+			"thumbnail": "https://image.ibb.co/kGwmHU/5.jpg",
             "current_order": null,
             "last_read": 0,
-			"title": "Haunted Camper",
-			"subTitle": "Who's watching me sleep?",
+			"title": "My Son",
+			"subTitle": "The disappearance of his child sends a man on a dark path to find the truth.",
 			"isNew": false,
 			"story": {
 				"title": "Mystery Dog",

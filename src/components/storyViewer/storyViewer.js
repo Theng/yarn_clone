@@ -7,8 +7,7 @@ import {
 	ScrollView,
 	AsyncStorage,
 	TouchableHighlight,
-	TouchableWithoutFeedback,
-	Image
+	TouchableWithoutFeedback
 } from "react-native";
 import FastImage from "react-native-fast-image";
 import * as Animatable from "react-native-animatable";
@@ -16,10 +15,7 @@ import * as Animatable from "react-native-animatable";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addReadStory } from "@actions";
-import {
-	DotIndicator,
-	BarIndicator
-  } from 'react-native-indicators';
+import { DotIndicator } from "react-native-indicators";
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
@@ -30,7 +26,7 @@ class BubbleMessage extends Component {
 	renderLeft = null;
 	textHeight = 0;
 	id = null;
-	isTyping = false
+	isTyping = false;
 	constructor(props) {
 		super(props);
 		var tmpShowStory = [];
@@ -41,17 +37,13 @@ class BubbleMessage extends Component {
 				}
 			});
 		}
-
 		this.state = {
 			showStory: tmpShowStory,
 			showImage: false,
-			currentImage:null
+			currentImage: null
 		};
 		this.id = this.props.item.id;
 		this.messages = this.props.item.story.messages;
-		// this.order = this.props.item.current_order
-		// 	? this.props.item.current_order+1
-		// 	: 0;
 		if (this.props.item.current_order != null) {
 			this.order = this.props.item.current_order + 1;
 		}
@@ -59,213 +51,8 @@ class BubbleMessage extends Component {
 
 	componentDidMount() {
 		setTimeout(() => {
-			this.refs.scrollView.scrollToEnd({ animated: true });
+			this.refs.scrollView.scrollToEnd({ animated: false });
 		}, 100);
-	}
-
-	addPercentage(id, order) {
-		let lastRead = order + 1;
-		let tmpInprogress = [];
-		this.props.inProgress.list.map((item, index) => {
-			if (item.id == id) {
-				tmpInprogress.push({ ...item, current_order: order, last_read: lastRead });
-			} else {
-				tmpInprogress.push(item);
-			}
-		});
-		this.props.addReadStory(tmpInprogress);
-		AsyncStorage.setItem("inprogress_list", JSON.stringify(tmpInprogress));
-	}
-
-	rightBubble = (item, noName) => {
-		return (
-			<View
-				style={{
-					width: deviceWidth - 32,
-					marginRight: 16,
-					marginLeft: 16,
-					marginTop: 12,
-					alignItems: "flex-end"
-				}}
-			>
-				{!noName ? (
-					<Text style={{ marginRight: 16, color: "#4B5968", paddingBottom: 6 }}>
-						{item.name}
-					</Text>
-				) : null}
-				{item.text ? (
-					<View
-						style={{
-							backgroundColor: "#0088F0",
-							padding: 12,
-							borderBottomLeftRadius: 24,
-							borderBottomRightRadius: 4,
-							borderTopLeftRadius: 24,
-							borderTopRightRadius: 24
-						}}
-					>
-					{
-						item.text=="##..."?
-						<View style={{width:40,height:16}}><DotIndicator  count={4} size={5} color='white' /></View>:
-						<Text
-							style={{
-								fontSize: 16,
-								paddingLeft: 8,
-								paddingRight: 8,
-								color: "white"
-							}}
-						>
-							{item.text}
-						</Text>
-					}
-						
-					</View>
-				) : null}
-				{item.image ? (
-					<TouchableWithoutFeedback onPress={() => this.openImage(item.image)}>
-						<View>
-							<FastImage
-								style={{
-									width: deviceWidth / 2,
-									height: (deviceWidth / 2) * 1.4,
-									borderBottomLeftRadius: 24,
-									borderBottomRightRadius: 4,
-									borderTopLeftRadius: 24,
-									borderTopRightRadius: 24
-								}}
-								source={require("../../assets/images/message_img1.jpg")}
-								resizeMode={FastImage.resizeMode.stretch}
-							/>
-							<View
-								style={{
-									width: deviceWidth / 2,
-									height: (deviceWidth / 2) * 1.4,
-									position: "absolute",
-									justifyContent: "center",
-									alignItems: "center"
-								}}
-							>
-								<Text style={{ color: "white", fontWeight: "bold", fontSize: 14 }}>
-									Tap to view image
-								</Text>
-							</View>
-						</View>
-					</TouchableWithoutFeedback>
-				) : null}
-			</View>
-		);
-	};
-
-	leftBubble = (item, noName) => {
-		return (
-			<View
-				style={{
-					width: deviceWidth - 32,
-					marginRight: 16,
-					marginLeft: 16,
-					marginTop: 12,
-					alignItems: "flex-start"
-				}}
-			>
-				{!noName ? (
-					<Text style={{ marginRight: 16, color: "#4B5968", paddingBottom: 6 }}>
-						{item.name}
-					</Text>
-				) : null}
-				{item.text ? (
-					<View
-						style={{
-							backgroundColor: "#EBEEF3",
-							padding: 12,
-							borderBottomLeftRadius: 4,
-							borderBottomRightRadius: 24,
-							borderTopLeftRadius: 24,
-							borderTopRightRadius: 24
-						}}
-					>
-						{
-						item.text=="##..."?
-						<View style={{width:40,height:16}}><DotIndicator  count={4} size={5} color='black' /></View>:
-						<Text
-							style={{
-								fontSize: 16,
-								paddingLeft: 8,
-								paddingRight: 8,
-								color: "black"
-							}}
-						>
-							{item.text}
-						</Text>
-					}
-					</View>
-				) : null}
-				{item.image ? (
-					<TouchableWithoutFeedback onPress={() => this.openImage(item.image)}>
-						<View>
-							<FastImage
-								style={{
-									width: deviceWidth / 2,
-									height: (deviceWidth / 2) * 1.4,
-									borderBottomLeftRadius: 4,
-									borderBottomRightRadius: 24,
-									borderTopLeftRadius: 24,
-									borderTopRightRadius: 24
-								}}
-								source={require("../../assets/images/message_img1.jpg")}
-								resizeMode={FastImage.resizeMode.stretch}
-							/>
-							<View
-								style={{
-									width: deviceWidth / 2,
-									height: (deviceWidth / 2) * 1.4,
-									position: "absolute",
-									justifyContent: "center",
-									alignItems: "center"
-								}}
-							>
-								<Text style={{ color: "white", fontWeight: "bold", fontSize: 14 }}>
-									Tap to view image
-								</Text>
-							</View>
-						</View>
-					</TouchableWithoutFeedback>
-				) : null}
-			</View>
-		);
-	};
-
-	openImage(image) {
-		this.setState({currentImage:image,showImage:true})
-	}
-
-	imageViewer() {
-		return (
-		<TouchableWithoutFeedback onPress={()=>this.setState({showImage:false})}>
-			<Animatable.View animation="fadeInUp" duration={300}
-				style={{
-					width: deviceWidth ,
-					height: deviceHeight-60,
-					position: "absolute",
-					backgroundColor: "rgba(0, 0, 0,.9)",
-					justifyContent:"center",
-					alignItems:"center"
-				}}
-			>
-				<FastImage
-					style={{
-						width: deviceWidth-64 ,
-						height: (deviceWidth-64)*1.4,
-						borderBottomLeftRadius: 24,
-						borderBottomRightRadius: 24,
-						borderTopLeftRadius: 24,
-						borderTopRightRadius: 24
-					}}
-					source={{uri:this.state.currentImage}}
-					resizeMode={FastImage.resizeMode.stretch}
-				/>
-			</Animatable.View >
-			</TouchableWithoutFeedback>
-		);
 	}
 
 	pressAction = () => {
@@ -273,18 +60,19 @@ class BubbleMessage extends Component {
 			this.addPercentage(this.id, this.order);
 			var showStory = this.state.showStory;
 
-			let thisMessage = this.messages[this.order]
-			if(thisMessage.is_typing){
-				this.isTyping= true
-				this.setState({ showStory: [...showStory, {...thisMessage,text:"##..."}] });
+			let thisMessage = this.messages[this.order];
+			if (thisMessage.is_typing) {
+				this.isTyping = true;
+				this.setState({
+					showStory: [...showStory, { ...thisMessage, text: "##..." }]
+				});
 				setTimeout(() => {
 					this.setState({ showStory: [...showStory, thisMessage] });
-					this.isTyping= false
+					this.isTyping = false;
 				}, 3000);
-			}else{
+			} else {
 				this.setState({ showStory: [...showStory, thisMessage] });
 			}
-			
 			this.order = this.order + 1;
 		}
 	};
@@ -316,49 +104,145 @@ class BubbleMessage extends Component {
 				</Animatable.View>
 			);
 		}
-
 		setTimeout(() => {
 			this.refs.scrollView.scrollToEnd({ animated: true });
-		}, 100);
+		}, 300);
 		return content;
 	};
 
-	flatListFooter = () => {
+	addPercentage(id, order) {
+		let lastRead = order + 1;
+		let tmpInprogress = [];
+		this.props.inProgress.list.map((item, index) => {
+			if (item.id == id) {
+				tmpInprogress.push({ ...item, current_order: order, last_read: lastRead });
+			} else {
+				tmpInprogress.push(item);
+			}
+		});
+		this.props.addReadStory(tmpInprogress);
+		AsyncStorage.setItem("inprogress_list", JSON.stringify(tmpInprogress));
+	}
+
+	openImage(image) {
+		this.setState({ currentImage: image, showImage: true });
+	}
+
+	imageViewer() {
 		return (
-			<View
-				style={{
-					height: 200,
-					width: deviceWidth
-				}}
-			/>
+			<TouchableWithoutFeedback
+				onPress={() => this.setState({ showImage: false })}
+			>
+				<Animatable.View
+					animation="fadeInUp"
+					duration={300}
+					style={styles.imageViewerContainer}
+				>
+					<FastImage
+						style={styles.imageViewer}
+						source={{ uri: this.state.currentImage }}
+						resizeMode={FastImage.resizeMode.stretch}
+					/>
+				</Animatable.View>
+			</TouchableWithoutFeedback>
 		);
+	}
+
+	rightBubble = (item, noName) => {
+		return (
+			<View style={styles.rightBubbleContainer}>
+				{!noName ? <Text style={styles.nameStyle}>{item.name}</Text> : null}
+				{item.text ? (
+					<View style={styles.rightBubbleMessageContainer}>
+						{item.text == "##..." ? (
+							<View style={styles.typingContainer}>
+								<DotIndicator count={4} size={5} color="white" />
+							</View>
+						) : (
+							<Text style={styles.rightBubbleMessageText}>{item.text}</Text>
+						)}
+					</View>
+				) : null}
+				{item.image ? (
+					<TouchableWithoutFeedback onPress={() => this.openImage(item.image)}>
+						<View>
+							<FastImage
+								style={styles.rightBubbleImage}
+								source={{uri:"https://image.ibb.co/bOdunU/message_img1.jpg"}}
+								resizeMode={FastImage.resizeMode.stretch}
+							/>
+							<View style={styles.rightBubbleAbsoluteTextContainer}>
+								<Text style={styles.absuluteText}>Tap to view image</Text>
+							</View>
+						</View>
+					</TouchableWithoutFeedback>
+				) : null}
+			</View>
+		);
+	};
+
+	leftBubble = (item, noName) => {
+		return (
+			<View style={styles.leftBubbleContainer}>
+				{!noName ? <Text style={styles.nameStyle}>{item.name}</Text> : null}
+				{item.text ? (
+					<View style={styles.leftBubbleTypingContainer}>
+						{item.text == "##..." ? (
+							<View style={styles.typingContainer}>
+								<DotIndicator count={4} size={5} color="black" />
+							</View>
+						) : (
+							<Text style={styles.leftBubbleMessageText}>{item.text}</Text>
+						)}
+					</View>
+				) : null}
+				{item.image ? (
+					<TouchableWithoutFeedback onPress={() => this.openImage(item.image)}>
+						<View>
+							<FastImage
+								style={styles.leftBubbleImage}
+								source={{uri:"https://image.ibb.co/bOdunU/message_img1.jpg"}}
+								resizeMode={FastImage.resizeMode.stretch}
+							/>
+							<View style={styles.leftBubbleAbsoluteTextContainer}>
+								<Text style={styles.absuluteText}>Tap to view image</Text>
+							</View>
+						</View>
+					</TouchableWithoutFeedback>
+				) : null}
+			</View>
+		);
+	};
+
+	flatListFooter = () => {
+		return <View style={styles.flatListFooter} />;
 	};
 
 	render() {
 		return (
-			<View style={{flex:1}}>
-			<ScrollView
-				style={{ flex: 1, backgroundColor: "white" }}
-				ref="scrollView"
-				showsVerticalScrollIndicator={false}
-			>
-				<TouchableHighlight
-					style={{ flex: 1 }}
-					activeOpacity={1}
-					onPress={this.pressAction}
-					underlayColor="rgba(0, 0, 0, 0)"
+			<View style={styles.flex}>
+				<ScrollView
+					style={styles.scrollViewStyle}
+					ref="scrollView"
+					showsVerticalScrollIndicator={false}
 				>
-					<FlatList
-						style={{ width: deviceWidth, minHeight: deviceHeight - 60 }}
-						ref="flatList"
-						data={this.state.showStory}
-						keyExtractor={(item, index) => index.toString()}
-						renderItem={this.rowItem}
-						ListFooterComponent={this.flatListFooter}
-					/>
-				</TouchableHighlight>
-			</ScrollView>
-			{this.state.showImage ? this.imageViewer() : null}
+					<TouchableHighlight
+						style={styles.flex}
+						activeOpacity={1}
+						onPress={this.pressAction}
+						underlayColor="rgba(0, 0, 0, 0)"
+					>
+						<FlatList
+							style={styles.flatListStyle}
+							ref="flatList"
+							data={this.state.showStory}
+							keyExtractor={(item, index) => index.toString()}
+							renderItem={this.rowItem}
+							ListFooterComponent={this.flatListFooter}
+						/>
+					</TouchableHighlight>
+				</ScrollView>
+				{this.state.showImage ? this.imageViewer() : null}
 			</View>
 		);
 	}
@@ -387,5 +271,105 @@ const styles = {
 	container: {
 		flex: 1,
 		backgroundColor: "white"
-	}
+	},
+	rightBubbleContainer: {
+		width: deviceWidth - 32,
+		marginRight: 16,
+		marginLeft: 16,
+		marginTop: 12,
+		alignItems: "flex-end"
+	},
+	nameStyle: { marginRight: 16, color: "#4B5968", paddingBottom: 6 },
+	rightBubbleMessageContainer: {
+		backgroundColor: "#0088F0",
+		padding: 12,
+		borderBottomLeftRadius: 24,
+		borderBottomRightRadius: 4,
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24
+	},
+	typingContainer: { width: 40, height: 16 },
+	rightBubbleMessageText: {
+		fontSize: 16,
+		paddingLeft: 8,
+		paddingRight: 8,
+		color: "white"
+	},
+	rightBubbleImage: {
+		width: deviceWidth / 2,
+		height: (deviceWidth / 2) * 1.4,
+		borderBottomLeftRadius: 24,
+		borderBottomRightRadius: 4,
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24,
+		backgroundColor: "#0088F0"
+	},
+	rightBubbleAbsoluteTextContainer: {
+		width: deviceWidth / 2,
+		height: (deviceWidth / 2) * 1.4,
+		position: "absolute",
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	absuluteText: { color: "white", fontWeight: "bold", fontSize: 14 },
+	leftBubbleContainer: {
+		width: deviceWidth - 32,
+		marginRight: 16,
+		marginLeft: 16,
+		marginTop: 12,
+		alignItems: "flex-start"
+	},
+	leftBubbleTypingContainer: {
+		backgroundColor: "#EBEEF3",
+		padding: 12,
+		borderBottomLeftRadius: 4,
+		borderBottomRightRadius: 24,
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24
+	},
+	leftBubbleMessageText: {
+		fontSize: 16,
+		paddingLeft: 8,
+		paddingRight: 8,
+		color: "black"
+	},
+	leftBubbleImage: {
+		width: deviceWidth / 2,
+		height: (deviceWidth / 2) * 1.4,
+		borderBottomLeftRadius: 4,
+		borderBottomRightRadius: 24,
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24,
+		backgroundColor: "#EBEEF3"
+	},
+	leftBubbleAbsoluteTextContainer: {
+		width: deviceWidth / 2,
+		height: (deviceWidth / 2) * 1.4,
+		position: "absolute",
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	imageViewerContainer: {
+		width: deviceWidth,
+		height: deviceHeight - 60,
+		position: "absolute",
+		backgroundColor: "rgba(0, 0, 0,.9)",
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	imageViewer: {
+		width: deviceWidth - 64,
+		height: (deviceWidth - 64) * 1.4,
+		borderBottomLeftRadius: 24,
+		borderBottomRightRadius: 24,
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24
+	},
+	flatListFooter: {
+		height: 200,
+		width: deviceWidth
+	},
+	flex: { flex: 1 },
+	scrollViewStyle: { flex: 1, backgroundColor: "white" },
+	flatListStyle: { width: deviceWidth, minHeight: deviceHeight - 60 }
 };

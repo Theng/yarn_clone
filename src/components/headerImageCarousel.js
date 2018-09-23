@@ -12,35 +12,31 @@ const height = (originalHeight * width) / originalWidth;
 const sliderData = [
 	{
 		id: 1,
-		title: "Haunted Camper",
-		subTitle: "Who's watching me sleep?",
+		title: "The House with a Clock in Its Walls",
+		subTitle: "A young orphan named Lewis Barnavelt aids.",
 		episode: "Episode 1 of 10",
-		thumbnail:
-			"https://image.ibb.co/ccRbz9/Screen_Shot_2018_09_22_at_3_04_49_PM.png"
+		thumbnail: "https://image.ibb.co/m9BmHU/webp_net_resizeimage_3_Ivb_S.jpg"
 	},
 	{
 		id: 1,
-		title: "Haunted Camper",
-		subTitle: "Who's watching me sleep? ",
+		title: "Fahrenheit 11/9",
+		subTitle: "Filmmaker Michael Moore examines",
 		episode: "Episode 1 of 10",
-		thumbnail:
-			"https://image.ibb.co/ccRbz9/Screen_Shot_2018_09_22_at_3_04_49_PM.png"
+		thumbnail: "https://image.ibb.co/eq8Bj9/webp_net_resizeimage_i_Gs8_B.jpg"
 	},
 	{
 		id: 1,
-		title: "Haunted Camper",
-		subTitle: "Who's watching me sleep? ",
+		title: "Life Itself",
+		subTitle: "As a young New York couple goes from college romance to marriage and the birth of their first child, the unexpected twists of their journey create reverberations that echo over continents and through lifetimes.",
 		episode: "Episode 1 of 10",
-		thumbnail:
-			"https://image.ibb.co/ccRbz9/Screen_Shot_2018_09_22_at_3_04_49_PM.png"
+		thumbnail: "https://image.ibb.co/bJ8oWp/webp_net_resizeimage_m0u08.jpg"
 	},
 	{
 		id: 1,
-		title: "Haunted Camper",
-		subTitle: "Who's watching me sleep? ",
+		title: "Assassination Nation",
+		subTitle: "After a malicious data hack exposes the secrets of the perpetually American town of Salem,",
 		episode: "Episode 1 of 10",
-		thumbnail:
-			"https://image.ibb.co/ccRbz9/Screen_Shot_2018_09_22_at_3_04_49_PM.png"
+		thumbnail: "https://image.ibb.co/b4ETWp/webp_net_resizeimage_Tr_B1_Q.jpg"
 	}
 ];
 
@@ -108,7 +104,11 @@ const styles = {
 		justifyContent: "center",
 		alignItems: "center"
 	},
-	image: { height: height - 1, width: width - 3 },
+	image: {
+		height: height - 1,
+		width: width - 3,
+		backgroundColor: "#95a5a6"
+	},
 	absoluteContainer: {
 		height: height - 1,
 		width: width - 3,

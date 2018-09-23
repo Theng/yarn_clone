@@ -1,14 +1,11 @@
 import React from "react";
-// import { AsyncStorage } from "react-native";
 import {
 	StackNavigator
 } from "react-navigation";
 
-
 //Redux
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-
 import { rootReducer } from "./reducers";
 const store = createStore(
 	rootReducer,
@@ -20,7 +17,6 @@ const store = createStore(
 import HomeScreen from "@containers/home-screen/home-screen"
 import ReaderScreen from "@containers/reader-screen/reader-screen"
 // Screen
-
 
 const RootSwitchNavigator = StackNavigator(
 	{
@@ -36,7 +32,7 @@ const RootSwitchNavigator = StackNavigator(
 
 const AppWithNavigationState = () => (
 	<Provider store={store}>
-				<RootSwitchNavigator />
+		<RootSwitchNavigator />
 	</Provider>
 );
 export default AppWithNavigationState;

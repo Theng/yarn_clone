@@ -20,7 +20,7 @@ class Header extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<View style={{ flexDirection: "row" }}>
+				<View style={styles.flexRow}>
 					<TouchableWithoutFeedback
 						hitSlop={hitSlopVal}
 						onPress={() => this.popNav()}
@@ -30,13 +30,13 @@ class Header extends Component {
 								name="md-arrow-back"
 								size={30}
 								color="black"
-								style={{ fontSize: 24, marginLeft: 24,marginTop:8 }}
+								style={styles.iconStyle}
 							/>
 						</View>
 					</TouchableWithoutFeedback>
-					<View  style={{marginLeft:24}}>
-						<Text style={{color:"black"}}>{this.props.title}</Text>
-						<Text  style={{fontSize:12,fontWeight:"500",color:"#C7CBD1"}}>{this.props.episode}</Text>
+					<View style={styles.infoContainer}>
+						<Text style={styles.title}>{this.props.title}</Text>
+						<Text style={styles.episode}>{this.props.episode}</Text>
 					</View>
 				</View>
 			</View>
@@ -55,6 +55,11 @@ const styles = StyleSheet.create({
 		alignItems: "flex-start",
 		shadowOpacity: 0.1,
 		shadowColor: "#787878",
-		elevation: .5,
-	}
+		elevation: 0.5
+	},
+	flexRow: { flexDirection: "row" },
+	iconStyle: { fontSize: 24, marginLeft: 24, marginTop: 8 },
+	infoContainer: { marginLeft: 24 },
+	title: { color: "black" },
+	episode: { fontSize: 12, fontWeight: "500", color: "#C7CBD1" }
 });
