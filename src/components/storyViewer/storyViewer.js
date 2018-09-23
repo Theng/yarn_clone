@@ -133,7 +133,7 @@ class BubbleMessage extends Component {
 									borderTopLeftRadius: 24,
 									borderTopRightRadius: 24
 								}}
-								source={require("../../assets/images/message_img1.jpeg")}
+								source={require("../../assets/images/message_img1.jpg")}
 								resizeMode={FastImage.resizeMode.stretch}
 							/>
 							<View
@@ -211,7 +211,7 @@ class BubbleMessage extends Component {
 									borderTopLeftRadius: 24,
 									borderTopRightRadius: 24
 								}}
-								source={require("../../assets/images/message_img1.jpeg")}
+								source={require("../../assets/images/message_img1.jpg")}
 								resizeMode={FastImage.resizeMode.stretch}
 							/>
 							<View
