@@ -41,6 +41,9 @@ class HomeScreen extends Component {
 					<HeaderImageCarousel/>
 					<CardSession data={data} navigation={this.props.navigation} />
 					<CardSession data={this.props.inProgress} navigation={this.props.navigation} />
+					<TouchableWithoutFeedback onPress={()=> AsyncStorage.clear()}>
+						<Text style={{padding:20,color:"white"}}>Clear</Text>
+					</TouchableWithoutFeedback>
 				</ScrollView>
             </View>
 		);

@@ -18,13 +18,14 @@
 						"name": "Julia",
 						"is_typing": false,
 						"order": 0,
-						"text": "Where did you get this dog?"
+						"image": "https://image.ibb.co/kbRq99/AXL_trailer_min.jpg"
 					},
 					{
 						"name": "Mom",
-						"is_typing": false,
+						"is_typing": true,
 						"order": 1,
 						"text": "I found her behind our house in the woods, why?"
+					
 					},
 					{
 						"name": "Julia",
@@ -34,7 +35,7 @@
 					},
 					{
 						"name": "Julia",
-						"is_typing": false,
+						"is_typing": true,
 						"order": 3,
 						"text": "Her eyes are so human like."
 					},
